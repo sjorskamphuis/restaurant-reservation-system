@@ -24,8 +24,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $user = hasRole(Auth::user(), "admin");
-        dd($user);
+        $user = hasRole(Auth::user(), "super-admin");
         return view('home', compact($user));
     }
 }
