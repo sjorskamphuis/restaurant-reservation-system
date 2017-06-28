@@ -44,14 +44,15 @@ class CreateApplicationUserRolesTable extends Migration
      */
     public function down()
     {
+        Log::info('DROP APPLICATION USER ROLES');
         // Drop foreign keys
-        Schema::table('user_roles', function(Blueprint $table) {
+        Schema::table('application_user_roles', function(Blueprint $table) {
             $table->dropForeign(['user_id']);
             $table->dropForeign(['role_id']);
         });
 
         // Drop tables
+        Schema::dropIfExists('application_user_roles');
         Schema::dropIfExists('roles');
-        Schema::dropIfExists('user_roles');
     }
 }
