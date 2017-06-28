@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateUserRolesTable extends Migration
+class CreateApplicationUserRolesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -18,14 +18,22 @@ class CreateUserRolesTable extends Migration
             $table->string('role', 100);
         });
 
-        Schema::create('user_roles', function (Blueprint $table) {
+        Schema::create('application_user_roles', function (Blueprint $table) {
             $table->integer('user_id')->unsigned();
             $table->integer('role_id')->unsigned();
+            $table->integer('application_id')->unsigned();
 
             $table->unique(array('user_id', 'role_id'));
 
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('role_id')->references('id')->on('roles')->onDelete('cascade');
+            $table->foreign('user_id')
+                ->references('id')->on('users')
+                ->onChange('cascade');
+            $table->foreign('role_id')
+                ->references('id')->on('roles')
+                ->onDelete('cascade');
+            $table->foreign('application_id')
+                ->references('id')->on('applications')
+                ->onDelete('cascade');
         });
     }
 
