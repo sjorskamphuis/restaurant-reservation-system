@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class UserRole extends Model
+class ApplicationUserRole extends Model
 {
     public $timestamps = false;
     /**
@@ -13,6 +13,7 @@ class UserRole extends Model
      * @var array
      */
     protected $fillable = [
+        'application_id',
         'user_id',
         'role_id'
     ];

@@ -16,3 +16,7 @@ Route::get('/', 'HomeController@index')->name('index');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::group(['prefix' => 'profile'], function() {
+   Route::get('/', 'ProfileController@index')->name('profile-overview');
+});

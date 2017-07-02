@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
@@ -23,7 +24,7 @@ class CreateApplicationUserRolesTable extends Migration
             $table->integer('role_id')->unsigned();
             $table->integer('application_id')->unsigned();
 
-            $table->unique(array('user_id', 'role_id'));
+            $table->unique(array('user_id', 'role_id', 'application_id'));
 
             $table->foreign('user_id')
                 ->references('id')->on('users')
@@ -49,6 +50,7 @@ class CreateApplicationUserRolesTable extends Migration
         Schema::table('application_user_roles', function(Blueprint $table) {
             $table->dropForeign(['user_id']);
             $table->dropForeign(['role_id']);
+            $table->dropForeign(['application_id']);
         });
 
         // Drop tables
